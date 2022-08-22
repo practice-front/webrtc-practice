@@ -1,7 +1,12 @@
 see:  https://codelabs.developers.google.com/codelabs/webrtc-web/
 
-# run node
+# node server start
+
 ```nodemon
-node with_signaling/2_data_exchange/index.js
+node with_signaling/1_stream/index.js
 
 ```
+
+# access html
+
+http://localhost:8181/with_signaling/1_stream/
