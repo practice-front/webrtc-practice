@@ -10,7 +10,8 @@ var turnReady;
 
 var pcConfig = {
     'iceServers': [{
-        'urls': 'stun:stun.l.google.com:19302'
+        // 'urls': 'stun:stun.l.google.com:19302'
+        'urls': 'stun:localhost:3478'
     }]
 };
 
@@ -154,7 +155,7 @@ function createPeerConnection() {
     } catch (e) {
         console.log('Failed to create PeerConnection, exception: ' + e.message);
         alert('Cannot create RTCPeerConnection object.');
-        return;
+
     }
 }
 
@@ -202,7 +203,8 @@ function onCreateSessionDescriptionError(error) {
 function requestTurn(turnURL) {
     var turnExists = false;
     for (var i in pcConfig.iceServers) {
-        if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
+        // if (pcConfig.iceServers[i].urls.substr(0, 5) === 'turn:') {
+        if (pcConfig.iceServers[i].urls.substr(0, 5) === 'stun:') {
             turnExists = true;
             turnReady = true;
             break;
