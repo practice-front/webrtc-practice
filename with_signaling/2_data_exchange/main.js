@@ -4,13 +4,13 @@
  * Initial setup
  ****************************************************************************/
 
-// var configuration = {
-//   'iceServers': [{
-//     'urls': 'stun:stun.l.google.com:19302'
-//   }]
-// };
+var configuration = {
+    'iceServers': [{
+        // 'urls': 'stun:stun.l.google.com:19302'
+        'urls': 'stun:socialme.hopto.org:3478'
+    }]
+};
 
-var configuration = null;
 
 // var roomURL = document.getElementById('url');
 var video = document.querySelector('video');
@@ -35,11 +35,12 @@ snapAndSendBtn.disabled = true;
 
 // Create a random room if not already present in the URL.
 var isInitiator;
-var room = window.location.hash.substring(1);
-if (!room) {
-    room = window.location.hash = randomToken();
-}
+// var room = window.location.hash.substring(1);
+// if (!room) {
+//     room = window.location.hash = randomToken();
+// }
 
+var room = 'foo';
 
 /****************************************************************************
  * Signaling server

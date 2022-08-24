@@ -4,9 +4,11 @@ var os = require('os');
 var nodeStatic = require('node-static');
 var http = require('http');
 var socketIO = require('socket.io');
+var accesslog = require('access-log');
 
 var fileServer = new(nodeStatic.Server)();
 var app = http.createServer(function(req, res) {
+  accesslog(req, res);
   fileServer.serve(req, res);
 }).listen(8181);
 
@@ -37,13 +39,13 @@ io.sockets.on('connection', function(socket) {
       socket.join(room);
       log('Client ID ' + socket.id + ' created room ' + room);
       socket.emit('created', room, socket.id);
+
     } else if (numClients === 1) {
       log('Client ID ' + socket.id + ' joined room ' + room);
-      // io.sockets.in(room).emit('join', room);
+      io.sockets.in(room).emit('join', room);
       socket.join(room);
       socket.emit('joined', room, socket.id);
-      io.sockets.in(room).emit('ready', room);
-      socket.broadcast.emit('ready', room);
+      io.sockets.in(room).emit('ready');
     } else { // max two clients
       socket.emit('full', room);
     }

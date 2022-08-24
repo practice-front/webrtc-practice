@@ -11,7 +11,7 @@ var turnReady;
 var pcConfig = {
     'iceServers': [{
         // 'urls': 'stun:stun.l.google.com:19302'
-        'urls': 'stun:localhost:3478'
+        'urls': 'stun:socialme.hopto.org:3478'
     }]
 };
 
@@ -119,11 +119,11 @@ var constraints = {
 
 console.log('Getting user media with constraints', constraints);
 
-if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-    requestTurn(
-        'https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913'
-    );
-}
+// if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+//     requestTurn(
+//         'https://computeengineondemand.appspot.com/turn?username=41784574&key=4080218913'
+//     );
+// }
 
 function maybeStart() {
     console.log('>>>>>>> maybeStart() ', isStarted, localStream, isChannelReady);
@@ -147,7 +147,7 @@ window.onbeforeunload = function() {
 
 function createPeerConnection() {
     try {
-        pc = new RTCPeerConnection(null);
+        pc = new RTCPeerConnection(pcConfig);
         pc.onicecandidate = handleIceCandidate;
         pc.onaddstream = handleRemoteStreamAdded;
         pc.onremovestream = handleRemoteStreamRemoved;
